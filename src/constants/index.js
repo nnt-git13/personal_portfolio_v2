@@ -1,10 +1,16 @@
-const navLinks = [
-    { label: "Store" },
-    { label: "Mac" },
-    { label: "iPhone" },
-    { label: "Watch" },
-    { label: "Vision" },
-    { label: "AirPods" },
+export const navLinks = [
+    {
+        id: "about",
+        title: "About",
+    },
+    {
+        id: "timeline",
+        title: "Experience",
+    },
+    {
+        id: "contact",
+        title: "Contact",
+    },
 ];
 
 const noChangeParts = [
@@ -132,7 +138,6 @@ export {
     features,
     featureSequence,
     footerLinks,
-    navLinks,
     noChangeParts,
     performanceImages,
     performanceImgPositions,

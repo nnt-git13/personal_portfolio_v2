@@ -87,9 +87,9 @@ const Hero = () => {
     };
 
     const handleExecuteProjects = () => {
-        const projectsSection = document.getElementById('projects') || document.getElementById('product-viewer');
-        if (projectsSection) {
-            projectsSection.scrollIntoView({ behavior: 'smooth' });
+        const kernelSection = document.getElementById('kernel-terminal');
+        if (kernelSection) {
+            kernelSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     };
 
@@ -147,22 +147,9 @@ const Hero = () => {
             ref={heroRef}
             className="relative min-h-screen flex flex-col justify-center overflow-hidden"
         >
-            {/* Multi-layer parallax background */}
-            <div className="absolute inset-0">
-                {/* Layer 1: Deep background gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-cyan-950/20" />
-                
-                {/* Layer 2: Neural network activation grid */}
-                <NeuralNetworkGrid prefersReducedMotion={prefersReducedMotion} />
-                
-                {/* Layer 3: GPU parallel threads */}
-                <GPUThreads prefersReducedMotion={prefersReducedMotion} mouseX={smoothX} mouseY={smoothY} />
-                
-                {/* Layer 4: Instruction pipeline traces */}
-                <InstructionPipelineTraces prefersReducedMotion={prefersReducedMotion} />
-                
-                {/* Layer 5: Data matrix streaming */}
-                <DataMatrixStreaming prefersReducedMotion={prefersReducedMotion} />
+            {/* Multi-layer parallax background - now handled by GlobalBackground, but keep hero-specific overlays */}
+            <div className="absolute inset-0 opacity-0 pointer-events-none">
+                {/* Background is now handled globally by GlobalBackground component */}
             </div>
 
             {/* Main hero content */}
@@ -350,7 +337,7 @@ const PremiumTerminalCTA = ({ onClick }) => {
                     repeatType: "reverse"
                 }}
             >
-                {isExecuting ? "executing…" : "execute projects --gpu"}
+                {isExecuting ? "executing…" : "open terminal"}
             </motion.span>
             <motion.span
                 className="premium-terminal-caret"

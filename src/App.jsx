@@ -1,32 +1,48 @@
+import { useState } from "react";
 import NavBar from "./components/NavBar.jsx";
 import Hero from "./components/Hero.jsx";
 import KernelVisualization from "./components/KernelVisualization.jsx";
 import FeatureCards from "./components/FeatureCards.jsx";
-import ProductViewer from "./components/ProductViewer.jsx";
+import Timeline from "./components/Timeline.jsx";
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/all";
-import Showcase from "./components/Showcase.jsx";
-import Performance from "./components/Performance.jsx";
-import Features from "./components/Features.jsx";
-import Highlights from "./components/Highlights.jsx";
+import About from "./components/About.jsx";
+import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
+import GlobalBackground from "./components/GlobalBackground.jsx";
+import BootScreen from "./components/BootScreen.jsx";
 
 gsap.registerPlugin(ScrollTrigger)
 
 const App = () => {
+    const [bootComplete, setBootComplete] = useState(false);
+
     return (
-        <main>
-            <NavBar />
-            <Hero />
-            <KernelVisualization />
-            <FeatureCards />
-            <ProductViewer />
-            <Showcase />
-            <Performance />
-            <Features />
-            <Highlights />
-            <Footer />
-        </main>
+        <>
+            {/* Boot Screen */}
+            {!bootComplete && (
+                <BootScreen onBootComplete={() => setBootComplete(true)} />
+            )}
+
+            {/* Main App - only show after boot */}
+            {bootComplete && (
+                <>
+                    {/* Global progressive background - tracks scroll from main */}
+                    <GlobalBackground />
+                    
+                    <main className="relative">
+                        <NavBar />
+                        <Hero />
+                        <KernelVisualization />
+                        <About />
+                        <FeatureCards />
+                        <Timeline />
+                        <Contact />
+                        <Footer />
+                    </main>
+                </>
+            )}
+        </>
     )
 }
 

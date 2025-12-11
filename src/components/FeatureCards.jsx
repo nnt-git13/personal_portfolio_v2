@@ -58,7 +58,7 @@ const FeatureCards = () => {
     };
 
     return (
-        <section className="feature-cards-section py-16 lg:py-24">
+        <section className="feature-cards-section py-12 lg:py-16">
             <div className="container mx-auto px-5 2xl:px-0 max-w-7xl">
                 <motion.div
                     className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
