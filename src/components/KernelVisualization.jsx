@@ -9,6 +9,8 @@ const KernelVisualization = () => {
     const [displayedText, setDisplayedText] = useState("");
     const [isTyping, setIsTyping] = useState(false);
     const [hasStarted, setHasStarted] = useState(false);
+    const charIndexRef = useRef(0);
+    const intervalRef = useRef(null);
 
     // Simulated kernel execution logs
     const kernelLogs = [
@@ -26,41 +28,78 @@ const KernelVisualization = () => {
                 "[INFO] Compiling experience logs..."
     ];
 
-    // Reset when section comes into view (allows it to restart if scrolled to again)
+    // Start animation when section comes into view
     useEffect(() => {
         if (isInView && !hasStarted) {
-            // Start animation if not started yet
             setHasStarted(true);
             setIsTyping(true);
+            setCurrentLog(0);
+            setDisplayedText("");
+            charIndexRef.current = 0;
         }
     }, [isInView, hasStarted]);
 
+    // Also start on mount if already in view
+    useEffect(() => {
+        if (sectionRef.current) {
+            const rect = sectionRef.current.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            if (isVisible && !hasStarted) {
+                setHasStarted(true);
+                setIsTyping(true);
+                setCurrentLog(0);
+                setDisplayedText("");
+                charIndexRef.current = 0;
+            }
+        }
+    }, []);
+
     // Typewriter effect for logs
     useEffect(() => {
-        if (!hasStarted || !isTyping) return;
+        // Cleanup function
+        const cleanup = () => {
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+                intervalRef.current = null;
+            }
+        };
+
+        if (!hasStarted || !isTyping) {
+            cleanup();
+            return cleanup;
+        }
         
         if (prefersReducedMotion) {
-            setDisplayedText(kernelLogs[0]);
-            return;
+            setDisplayedText(kernelLogs.join('\n'));
+            return cleanup;
         }
 
         const log = kernelLogs[currentLog];
-        if (!log) return;
+        if (!log) {
+            setIsTyping(false);
+            return cleanup;
+        }
         
-        let charIndex = 0;
+        // Reset character index when moving to a new log
+        charIndexRef.current = 0;
         setDisplayedText("");
         
-        const typeInterval = setInterval(() => {
-            if (charIndex < log.length) {
-                setDisplayedText(log.slice(0, charIndex + 1));
-                charIndex++;
+        // Clear any existing interval
+        cleanup();
+        
+        // Start typing the current log
+        intervalRef.current = setInterval(() => {
+            if (charIndexRef.current < log.length) {
+                setDisplayedText(log.slice(0, charIndexRef.current + 1));
+                charIndexRef.current++;
             } else {
-                clearInterval(typeInterval);
+                cleanup();
+                
+                // Wait before moving to next log
                 setTimeout(() => {
                     if (currentLog < kernelLogs.length - 1) {
                         // Move to next log
                         setCurrentLog((prev) => prev + 1);
-                        setDisplayedText("");
                     } else {
                         // All logs complete, keep terminal visible
                         setIsTyping(false);
@@ -69,8 +108,8 @@ const KernelVisualization = () => {
             }
         }, 30);
 
-        return () => clearInterval(typeInterval);
-    }, [currentLog, prefersReducedMotion, kernelLogs, hasStarted, isTyping]);
+        return cleanup;
+    }, [currentLog, prefersReducedMotion, kernelLogs.length, hasStarted, isTyping]);
 
     const containerVariants = {
         hidden: { opacity: 0, y: 30 },
@@ -134,24 +173,25 @@ const KernelVisualization = () => {
                         <div className="terminal-content">
                             {/* Log display */}
                             <div className="terminal-logs">
-                                {kernelLogs.slice(0, currentLog + 1).map((log, index) => (
+                                {kernelLogs.slice(0, currentLog).map((log, index) => (
                                     <div key={index} className="terminal-log-line">
-                                        {index === currentLog ? (
-                                            <>
-                                                {displayedText}
-                                                <motion.span
-                                                    animate={{ opacity: [1, 0] }}
-                                                    transition={{ duration: 0.8, repeat: Infinity }}
-                                                    className="cursor"
-                                                >
-                                                    |
-                                                </motion.span>
-                                            </>
-                                        ) : (
-                                            log
-                                        )}
+                                        {log}
                                     </div>
                                 ))}
+                                {currentLog < kernelLogs.length && (
+                                    <div className="terminal-log-line">
+                                        {displayedText}
+                                        {isTyping && (
+                                            <motion.span
+                                                animate={{ opacity: [1, 0] }}
+                                                transition={{ duration: 0.8, repeat: Infinity }}
+                                                className="cursor"
+                                            >
+                                                |
+                                            </motion.span>
+                                        )}
+                                    </div>
+                                )}
                             </div>
 
                             {/* Performance metrics */}
