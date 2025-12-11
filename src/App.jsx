@@ -1,5 +1,7 @@
 import NavBar from "./components/NavBar.jsx";
 import Hero from "./components/Hero.jsx";
+import KernelVisualization from "./components/KernelVisualization.jsx";
+import FeatureCards from "./components/FeatureCards.jsx";
 import ProductViewer from "./components/ProductViewer.jsx";
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/all";
@@ -16,6 +18,8 @@ const App = () => {
         <main>
             <NavBar />
             <Hero />
+            <KernelVisualization />
+            <FeatureCards />
             <ProductViewer />
             <Showcase />
             <Performance />
