@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const BootScreen = ({ onBootComplete }) => {
-    const [logs, setLogs] = useState([]);
+    const [logs, setLogs] = useState(['[  0.000000] Initializing system...']);
     const [currentStep, setCurrentStep] = useState(0);
     const [showCursor, setShowCursor] = useState(true);
     const [loadProgress, setLoadProgress] = useState(0);

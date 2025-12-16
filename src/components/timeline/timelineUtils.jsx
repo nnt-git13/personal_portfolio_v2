@@ -73,6 +73,11 @@ export const categoryConfig = {
         color: '#4dabf7',
         icon: 'MCU',
         label: 'EMBEDDED'
+    },
+    project: {
+        color: '#00d4ff',
+        icon: 'CPU',
+        label: 'PROJECT'
     }
 };
 

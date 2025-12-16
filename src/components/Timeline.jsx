@@ -14,23 +14,66 @@ const Timeline = () => {
     return (
         <>
             {/* Section Transition - flows from previous section */}
-            <div className="relative h-16 lg:h-20 overflow-hidden">
+            <motion.div 
+                className="relative h-24 lg:h-32 overflow-hidden"
+                initial={{ opacity: 0, height: 0 }}
+                animate={isInView ? { opacity: 1, height: "auto" } : {}}
+                transition={{ duration: 0.8 }}
+            >
                 <motion.div
                     className="absolute inset-0 flex items-center justify-center"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6 }}
+                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                    animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                    transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                    <span className="text-cyan-400 font-mono text-sm lg:text-base">
+                    <motion.span 
+                        className="text-cyan-400 font-mono text-sm lg:text-base"
+                        initial={{ opacity: 0 }}
+                        animate={isInView ? { opacity: 1 } : {}}
+                        transition={{ duration: 0.6, delay: 0.4 }}
+                    >
                         [COMPILING EXECUTION TRACE...]
-                    </span>
+                    </motion.span>
                 </motion.div>
-            </div>
+                
+                {/* Data stream lines */}
+                {[...Array(3)].map((_, i) => (
+                    <motion.div
+                        key={i}
+                        className="absolute h-px bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent"
+                        style={{ top: `${30 + i * 20}%`, width: '100%' }}
+                        initial={{ x: '-100%', opacity: 0 }}
+                        animate={isInView ? { x: '200%', opacity: [0, 0.6, 0] } : {}}
+                        transition={{
+                            duration: 2 + i * 0.3,
+                            delay: 0.5 + i * 0.2,
+                            repeat: Infinity,
+                            repeatDelay: 2,
+                            ease: 'linear'
+                        }}
+                    />
+                ))}
+            </motion.div>
             
-            <section 
+            <motion.section 
                 ref={containerRef}
-                className="compute-timeline-section py-12 lg:py-16 relative overflow-hidden"
+                className="compute-timeline-section pt-0 pb-12 lg:pb-16 relative overflow-hidden"
                 id="timeline"
+                initial={{ 
+                    opacity: 0, 
+                    clipPath: "inset(0% 100% 0% 0%)",
+                    filter: "blur(10px)"
+                }}
+                animate={isInView ? {
+                    opacity: 1,
+                    clipPath: "inset(0% 0% 0% 0%)",
+                    filter: "blur(0px)"
+                } : {
+                    opacity: 0.3,
+                    clipPath: "inset(0% 50% 0% 0%)",
+                    filter: "blur(5px)"
+                }}
+                transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
             >
                 {/* Split background: 50% architecture (top), 50% stars (bottom) */}
                 <div className="absolute inset-0 pointer-events-none">
@@ -158,21 +201,23 @@ const Timeline = () => {
                                         </p>
 
                                         {/* Tech Tags */}
-                                        <div className="flex flex-wrap gap-1.5">
-                                            {item.tech.slice(0, 3).map((tech, i) => (
-                                                <span
-                                                    key={i}
-                                                    className="px-2 py-0.5 bg-cyan-500/10 text-cyan-400 text-xs font-mono rounded border border-cyan-500/20"
-                                                >
-                                                    {tech}
-                                                </span>
-                                            ))}
-                                            {item.tech.length > 3 && (
-                                                <span className="px-2 py-0.5 text-gray-400 text-xs font-mono">
-                                                    +{item.tech.length - 3}
-                                                </span>
-                                            )}
-                                        </div>
+                                        {item.tech && Array.isArray(item.tech) && item.tech.length > 0 && (
+                                            <div className="flex flex-wrap gap-1.5">
+                                                {item.tech.slice(0, 3).map((tech, i) => (
+                                                    <span
+                                                        key={i}
+                                                        className="px-2 py-0.5 bg-cyan-500/10 text-cyan-400 text-xs font-mono rounded border border-cyan-500/20"
+                                                    >
+                                                        {tech}
+                                                    </span>
+                                                ))}
+                                                {item.tech.length > 3 && (
+                                                    <span className="px-2 py-0.5 text-gray-400 text-xs font-mono">
+                                                        +{item.tech.length - 3}
+                                                    </span>
+                                                )}
+                                            </div>
+                                        )}
 
                                         {/* Hover Glow Effect */}
                                         <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-cyan-500/0 to-cyan-500/0 group-hover:from-cyan-500/5 group-hover:to-transparent transition-all duration-300 pointer-events-none" />
@@ -191,7 +236,7 @@ const Timeline = () => {
                         onClose={() => setExpandedId(null)} 
                     />
                 )}
-            </section>
+            </motion.section>
         </>
     );
 };

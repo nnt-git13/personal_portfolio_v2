@@ -18,14 +18,14 @@ const aboutContent = {
       <div className="space-y-4">
         <p className="text-white/80 leading-relaxed">
           Hi, I'm Nathan! I'm an undergraduate student at the Massachusetts Institute of Technology (MIT) 
-          studying Electrical Engineering w/ Computing and Mathematics. I'm passionate about computer systems, 
+          studying Electrical Engineering w/ Computing and Mathematics. I'm passionate about computer systems, software engineering, 
           GPU acceleration, and robotics. I build high-performance applications that bridge the gap between hardware 
           and software, focusing on optimization, real-time systems, and machine learning/ reinforcement learning and 
           deep learning infrastructure.
         </p>
         <p className="text-white/80 leading-relaxed">
-          My work spans from reinforcement learning of electromagnetic swarm dynamics to GPU kernel optimization, compiler research, 
-          and autonomous robotics systems. I'm driven by the challenge of making algorithms run faster 
+          My work spans from reinforcement learning of electromagnetic swarm dynamics to building UI for Brain AI models,
+          kernel optimization, and autonomous robotics systems. I'm driven by the challenge of making algorithms run faster 
           and more efficiently on modern hardware, and I'm always looking for new challenges and opportunities to learn.
         </p>
         <div className="mt-6 pt-6 border-t border-white/10">
@@ -44,35 +44,74 @@ const aboutContent = {
   skills: {
     title: "Technical Skills",
     content: (
-      <div className="space-y-6">
+      <div className="space-y-8">
+        {/* Proficient Skills */}
         <div>
-          <h4 className="text-cyan-400 font-semibold mb-3">Languages</h4>
-          <div className="flex flex-wrap gap-2">
-            {["Python", "C/C++", "CUDA", "JavaScript", "TypeScript", "Verilog", "Assembly"].map((skill) => (
-              <span key={skill} className="px-3 py-1 rounded-full bg-white/5 border border-cyan-400/30 text-white/80 text-sm">
-                {skill}
-              </span>
-            ))}
+          <h4 className="text-cyan-400 font-semibold mb-4 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-green-400"></span>
+            Proficient
+          </h4>
+          <div className="space-y-4">
+            <div>
+              <p className="text-white/60 text-xs mb-2 uppercase tracking-wider">Languages</p>
+              <div className="flex flex-wrap gap-2">
+                {["Python", "C/C++", "JavaScript", "TypeScript"].map((skill) => (
+                  <span key={skill} className="px-3 py-1.5 rounded-full bg-white/5 border border-green-400/40 text-white/90 text-sm font-medium">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <p className="text-white/60 text-xs mb-2 uppercase tracking-wider">Frameworks & Tools</p>
+              <div className="flex flex-wrap gap-2">
+                {["PyTorch", "React", "Docker", "Git", "Django"].map((skill) => (
+                  <span key={skill} className="px-3 py-1.5 rounded-full bg-white/5 border border-green-400/40 text-white/90 text-sm font-medium">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
+
+        {/* Building Skills */}
         <div>
-          <h4 className="text-cyan-400 font-semibold mb-3">Frameworks & Tools</h4>
-          <div className="flex flex-wrap gap-2">
-            {["PyTorch", "TensorFlow", "ROS2", "React", "Docker", "Git", "MLIR", "LLVM", "Triton"].map((skill) => (
-              <span key={skill} className="px-3 py-1 rounded-full bg-white/5 border border-cyan-400/30 text-white/80 text-sm">
-                {skill}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div>
-          <h4 className="text-cyan-400 font-semibold mb-3">Hardware & Systems</h4>
-          <div className="flex flex-wrap gap-2">
-            {["FPGA", "RISC-V", "PCB Design", "Embedded Systems", "RTOS", "Control Systems"].map((skill) => (
-              <span key={skill} className="px-3 py-1 rounded-full bg-white/5 border border-cyan-400/30 text-white/80 text-sm">
-                {skill}
-              </span>
-            ))}
+          <h4 className="text-cyan-400 font-semibold mb-4 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
+            Building
+          </h4>
+          <div className="space-y-4">
+            <div>
+              <p className="text-white/60 text-xs mb-2 uppercase tracking-wider">Languages</p>
+              <div className="flex flex-wrap gap-2">
+                {["CUDA", "Verilog", "Assembly"].map((skill) => (
+                  <span key={skill} className="px-3 py-1.5 rounded-full bg-white/5 border border-yellow-400/40 text-white/80 text-sm">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <p className="text-white/60 text-xs mb-2 uppercase tracking-wider">Frameworks & Tools</p>
+              <div className="flex flex-wrap gap-2">
+                {["TensorFlow", "MLIR", "LLVM", "Triton"].map((skill) => (
+                  <span key={skill} className="px-3 py-1.5 rounded-full bg-white/5 border border-yellow-400/40 text-white/80 text-sm">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <p className="text-white/60 text-xs mb-2 uppercase tracking-wider">Hardware & Systems</p>
+              <div className="flex flex-wrap gap-2">
+                {["FPGA", "RISC-V", "PCB Design", "RTOS"].map((skill) => (
+                  <span key={skill} className="px-3 py-1.5 rounded-full bg-white/5 border border-yellow-400/40 text-white/80 text-sm">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -114,28 +153,28 @@ const ClassesContent = () => {
   // Courses from academic planner (excluding 18.01, Biology, and English classes)
   const allCourses = [
     // Prior Credit
-    { code: "18.06", title: "Linear Algebra", category: "Math" },
-    { code: "18.03", title: "Differential Equations", category: "Math" },
+    { code: "18.06", title: "Linear Algebra", category: "Math", upcoming: false },
+    // { code: "18.03", title: "Differential Equations", category: "Math" },
     
     
-    { code: "18.02", title: "Multivariable Calculus", category: "Math" },
-    { code: "6.1010", title: "Fundamentals of Programming", category: "Software" },
-    { code: "6.1200", title: "Discrete Mathematics", category: "Math" },
+    { code: "18.02", title: "Multivariable Calculus", category: "Math", upcoming: false },
+    { code: "6.1010", title: "Fundamentals of Programming", category: "Software", upcoming: false },
+    { code: "6.1200", title: "Discrete Mathematics", category: "Math", upcoming: false },
     
     // Sophomore Fall '25
-    { code: "6.1210", title: "Introduction to Algorithms", category: "Software" },
-    { code: "6.2000", title: "Electrical Circuits: Modeling and Design of Physical Systems", category: "Hardware" },
-    { code: "6.3900", title: "Introduction to Machine Learning", category: "ML & Robotics" },
-    { code: "18.600", title: "Probability and Random Variables", category: "Math" },
-    { code: "16.632A", title: "Introduction to Autonomous Machines I", category: "ML & Robotics" },
+    { code: "6.1210", title: "Introduction to Algorithms", category: "Software", upcoming: false },
+    { code: "6.2000", title: "Electrical Circuits: Modeling and Design of Physical Systems", category: "Hardware", upcoming: false },
+    { code: "6.3900", title: "Introduction to Machine Learning", category: "ML & Robotics", upcoming: false },
+    { code: "18.600", title: "Probability and Random Variables", category: "Math", upcoming: false },
+    { code: "16.632A", title: "Introduction to Autonomous Machines I", category: "ML & Robotics", upcoming: false },
     
-    // Sophomore Spring '26
-    { code: "6.1910", title: "Computation Structures", category: "Hardware" },
-    { code: "6.2080", title: "Semiconductor Electronic Circuits", category: "Hardware" },
-    { code: "6.1903", title: "Introduction to Low-level Programming in C and Assembly", category: "Hardware" },
-    { code: "16.632B", title: "Introduction to Autonomous Machines II", category: "ML & Robotics" },
-    { code: "6.1020", title: "Software Construction", category: "Software" },
-    { code: "18.650", title: "Fundamentals of Statistics", category: "Math" },
+    // // Sophomore Spring '26
+    { code: "6.1910", title: "Computation Structures", category: "Hardware", upcoming: true },
+    { code: "6.2080", title: "Semiconductor Electronic Circuits", category: "Hardware", upcoming: true },
+    { code: "6.1903", title: "Introduction to Low-level Programming in C and Assembly", category: "Hardware", upcoming: true },
+    { code: "16.632B", title: "Introduction to Autonomous Machines II", category: "ML & Robotics", upcoming: true },
+    { code: "6.1020", title: "Software Construction", category: "Software", upcoming: true },
+    { code: "18.650", title: "Fundamentals of Statistics", category: "Math", upcoming: true },
     
     // // Junior Fall '26 (commented - uncomment as completed)
     // { code: "18.615", title: "Introduction to Stochastic Processes (G)", category: "Math" },
@@ -212,9 +251,10 @@ const ClassesContent = () => {
             {category}
           </button>
         ))}
-        <span className="text-white/50 text-xs ml-auto">
-          *G indicates graduate class
-        </span>
+        <div className="flex flex-col items-end gap-1 ml-auto">
+          <span className="text-white/50 text-xs">*G indicates graduate class</span>
+          <span className="text-white/50 text-xs italic font-serif">*Italic indicates upcoming class</span>
+        </div>
       </div>
 
       {/* Course Grid */}
@@ -230,7 +270,11 @@ const ClassesContent = () => {
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 className="p-4 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors cursor-pointer"
               >
-                <p className="text-white text-sm font-medium">
+                <p className={`text-sm font-medium ${
+                  course.upcoming 
+                    ? "text-white/60 italic font-serif" 
+                    : "text-white font-sans"
+                }`}>
                   {course.code} {course.title}
                 </p>
               </motion.div>
@@ -247,7 +291,11 @@ const ClassesContent = () => {
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 className="p-4 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors cursor-pointer"
               >
-                <p className="text-white text-sm font-medium">
+                <p className={`text-sm font-medium ${
+                  course.upcoming 
+                    ? "text-white/60 italic font-serif" 
+                    : "text-white font-sans"
+                }`}>
                   {course.code} {course.title}
                 </p>
               </motion.div>
@@ -324,7 +372,69 @@ const About = () => {
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" ref={containerRef} className="about-section py-12 lg:py-16 relative overflow-hidden">
+    <>
+      {/* Transition from kernel terminal to About */}
+      <motion.div 
+        className="relative h-20 lg:h-28 overflow-hidden"
+        initial={{ opacity: 0, height: 0 }}
+        animate={isInView ? { opacity: 1, height: "auto" } : {}}
+        transition={{ duration: 0.8 }}
+      >
+        <motion.div
+          className="absolute inset-0 flex items-center justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <motion.span 
+            className="text-cyan-400 font-mono text-sm lg:text-base"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            [LOADING PROFILE DATA...]
+          </motion.span>
+        </motion.div>
+        
+        {/* Data stream lines */}
+        {[...Array(4)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute h-px bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent"
+            style={{ top: `${20 + i * 20}%`, width: '100%' }}
+            initial={{ x: '-100%', opacity: 0 }}
+            animate={isInView ? { x: '200%', opacity: [0, 0.6, 0] } : {}}
+            transition={{
+              duration: 2.5 + i * 0.3,
+              delay: 0.5 + i * 0.2,
+              repeat: Infinity,
+              repeatDelay: 2,
+              ease: 'linear'
+            }}
+          />
+        ))}
+      </motion.div>
+
+      <motion.section 
+        id="about" 
+        ref={containerRef} 
+        className="about-section pt-12 lg:pt-16 pb-0 relative overflow-hidden"
+        initial={{ 
+          opacity: 0, 
+          clipPath: "inset(0% 100% 0% 0%)",
+          filter: "blur(10px)"
+        }}
+        animate={isInView ? {
+          opacity: 1,
+          clipPath: "inset(0% 0% 0% 0%)",
+          filter: "blur(0px)"
+        } : {
+          opacity: 0.3,
+          clipPath: "inset(0% 50% 0% 0%)",
+          filter: "blur(5px)"
+        }}
+        transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+      >
       {/* Background effects */}
       <div className="absolute inset-0 opacity-20">
         <div
@@ -341,9 +451,9 @@ const About = () => {
 
       <div className="container mx-auto px-5 2xl:px-0 max-w-7xl relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+          animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
           className="text-center mb-12"
         >
           <p className="text-cyan-400 text-sm uppercase tracking-wider mb-4">
@@ -357,9 +467,9 @@ const About = () => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Left Column - Content */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ opacity: 0, x: -80, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-6"
           >
             {/* Tabs */}
@@ -410,10 +520,11 @@ const About = () => {
 
           {/* Right Column - GPU Model */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            initial={{ opacity: 0, x: 80, scale: 0.9, rotateY: -15 }}
+            animate={isInView ? { opacity: 1, x: 0, scale: 1, rotateY: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="relative h-[500px] lg:h-[600px] rounded-2xl overflow-hidden bg-black/40 backdrop-blur-sm border border-white/10"
+            style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
           >
             {/* GPU Platform/Vignette - neutral dark vignette */}
             <div 
@@ -437,7 +548,8 @@ const About = () => {
           </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
+    </>
   );
 };
 

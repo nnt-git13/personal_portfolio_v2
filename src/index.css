@@ -620,6 +620,8 @@ body {
   .kernel-visualization-section {
     @apply relative bg-black;
     background: radial-gradient(ellipse at top, rgba(0, 255, 255, 0.05) 0%, transparent 50%);
+    will-change: transform, opacity, filter, clip-path;
+    transform-style: preserve-3d;
   }
 
   .kernel-terminal {
@@ -628,6 +630,8 @@ body {
     box-shadow: 
       0 0 40px rgba(0, 255, 255, 0.1),
       inset 0 0 30px rgba(0, 255, 255, 0.02);
+    transform-style: preserve-3d;
+    will-change: transform, opacity, filter;
   }
 
   .terminal-header {
@@ -674,6 +678,10 @@ body {
 
   .terminal-log-line .cursor {
     @apply text-cyan-400;
+  }
+
+  .terminal-log-line.green {
+    @apply text-green-400;
   }
 
   .performance-metrics {
@@ -733,6 +741,8 @@ body {
   .about-section {
     @apply relative bg-black;
     background: radial-gradient(ellipse at top, rgba(0, 255, 255, 0.03) 0%, transparent 50%);
+    will-change: transform, opacity, filter, clip-path;
+    transform-style: preserve-3d;
   }
 
   /* Laptop Section Wrapper */
@@ -963,6 +973,8 @@ body {
   .feature-cards-section {
     @apply relative bg-black;
     background: radial-gradient(ellipse at top, rgba(0, 255, 255, 0.03) 0%, transparent 50%);
+    will-change: transform, opacity, filter, clip-path;
+    transform-style: preserve-3d;
   }
 
   .feature-card {

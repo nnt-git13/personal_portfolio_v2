@@ -72,6 +72,25 @@ const Earth = () => {
 };
 
 const EarthCanvas = () => {
+  const [webglSupported, setWebglSupported] = React.useState(true);
+  
+  React.useEffect(() => {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    setWebglSupported(!!gl);
+    if (!gl) {
+      console.warn('WebGL not supported, Earth canvas will not render');
+    }
+  }, []);
+  
+  if (!webglSupported) {
+    return (
+      <div className="w-full h-full flex items-center justify-center text-white/60 text-sm font-mono">
+        WebGL not supported
+      </div>
+    );
+  }
+  
   return (
     <Canvas
       shadows

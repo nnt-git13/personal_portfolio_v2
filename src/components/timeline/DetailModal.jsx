@@ -68,23 +68,26 @@ const DetailModal = ({ item, isOpen, onClose }) => {
                             <p className="text-white/80 text-base mb-8 leading-relaxed">{item.description}</p>
 
                             {/* Full tech stack */}
-                            <div className="mb-8">
-                                <h3 className="text-white/60 text-sm font-mono mb-4">INSTRUCTION SET:</h3>
-                                <div className="flex flex-wrap gap-2">
-                                    {item.tech.map((tech) => {
-                                        const opcode = skillToOpcode[tech] || tech.toUpperCase().replace(/\s+/g, '_');
-                                        return (
-                                            <span
-                                                key={tech}
-                                                className="text-sm px-3 py-2 rounded font-mono bg-black/40 text-cyan-300 border border-cyan-500/30"
-                                                style={{ borderColor: `${color}40` }}
-                                            >
-                                                {opcode}
-                                            </span>
-                                        );
-                                    })}
+                            {item.tech && Array.isArray(item.tech) && item.tech.length > 0 && (
+                                <div className="mb-8">
+                                    <h3 className="text-white/60 text-sm font-mono mb-4">INSTRUCTION SET:</h3>
+                                    <div className="flex flex-wrap gap-2">
+                                        {item.tech.map((tech) => {
+                                            if (!tech) return null;
+                                            const opcode = skillToOpcode[tech] || tech.toUpperCase().replace(/\s+/g, '_');
+                                            return (
+                                                <span
+                                                    key={tech}
+                                                    className="text-sm px-3 py-2 rounded font-mono bg-black/40 text-cyan-300 border border-cyan-500/30"
+                                                    style={{ borderColor: `${color}40` }}
+                                                >
+                                                    {opcode}
+                                                </span>
+                                            );
+                                        })}
+                                    </div>
                                 </div>
-                            </div>
+                            )}
 
                             {/* GitHub link */}
                             {item.github && (

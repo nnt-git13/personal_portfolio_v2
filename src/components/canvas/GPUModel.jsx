@@ -100,6 +100,7 @@ const GPUCanvas = () => {
           position={[0, -5, 0]} 
           intensity={0.3}
           color="#ffffff"
+
         />
 
         <OrbitControls
@@ -123,4 +124,5 @@ const GPUCanvas = () => {
 useGLTF.preload("/models/gpu/scene.gltf");
 
 export default GPUCanvas;
+
 

@@ -46,26 +46,42 @@ const FeatureCards = () => {
     };
 
     const cardVariants = {
-        hidden: { opacity: 0, y: 30 },
+        hidden: { opacity: 0, y: 50, scale: 0.9, filter: "blur(10px)" },
         visible: {
             opacity: 1,
             y: 0,
+            scale: 1,
+            filter: "blur(0px)",
             transition: {
-                duration: prefersReducedMotion ? 0 : 0.6,
-                ease: "easeOut"
+                duration: prefersReducedMotion ? 0 : 0.8,
+                ease: [0.16, 1, 0.3, 1]
             }
         }
     };
 
     return (
-        <section className="feature-cards-section py-12 lg:py-16">
+        <motion.section 
+            className="feature-cards-section pt-0 pb-0"
+            initial={{ 
+                opacity: 0, 
+                clipPath: "inset(0% 0% 100% 0%)",
+                filter: "blur(10px)"
+            }}
+            whileInView={{
+                opacity: 1,
+                clipPath: "inset(0% 0% 0% 0%)",
+                filter: "blur(0px)"
+            }}
+            viewport={{ once: false, margin: "-100px" }}
+            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+        >
             <div className="container mx-auto px-5 2xl:px-0 max-w-7xl">
                 <motion.div
                     className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, margin: "-100px" }}
+                    viewport={{ once: false, margin: "-100px" }}
                 >
                     {features.map((feature, index) => (
                         <motion.div
@@ -108,7 +124,7 @@ const FeatureCards = () => {
                     ))}
                 </motion.div>
             </div>
-        </section>
+        </motion.section>
     );
 };
 
