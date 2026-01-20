@@ -61,7 +61,7 @@ const FeatureCards = () => {
 
     return (
         <motion.section 
-            className="feature-cards-section pt-0 pb-0"
+            className="feature-cards-section py-16 lg:py-24"
             initial={{ 
                 opacity: 0, 
                 clipPath: "inset(0% 0% 100% 0%)",
@@ -76,6 +76,22 @@ const FeatureCards = () => {
             transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
         >
             <div className="container mx-auto px-5 2xl:px-0 max-w-7xl">
+                {/* Section Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false, margin: "-100px" }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    className="text-center mb-12 lg:mb-16"
+                >
+                    <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+                        Key Focus Areas
+                    </h2>
+                    <p className="text-cyan-400/80 text-lg lg:text-xl max-w-2xl mx-auto">
+                        Core domains where I apply systems thinking and optimization
+                    </p>
+                </motion.div>
+
                 <motion.div
                     className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
                     variants={containerVariants}
