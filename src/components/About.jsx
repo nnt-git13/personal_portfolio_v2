@@ -32,10 +32,10 @@ const aboutContent = {
           <h4 className="text-cyan-400 font-semibold mb-3">Current Focus</h4>
           <ul className="space-y-2 text-white/70">
             <li>• Reinforcement learning of swarm dynamics</li>
-            <li>• GPU kernel optimization with CUDA and Triton</li>
-            <li>• Compiler infrastructure (MLIR/LLVM)</li>
             <li>• Backend webdevelopment with JS and Django</li>
             <li>• Autonomous robotics and sensor fusion</li>
+            <li>• Machine Learning Applications with large language models</li>
+            <li>• GPU and CPU level architecture optimization</li>
           </ul>
         </div>
       </div>
@@ -135,7 +135,7 @@ const aboutContent = {
         </div>
         <div className="p-4 rounded-lg bg-white/5 border border-white/10">
           <h4 className="text-cyan-400 font-semibold mb-2">Projects</h4>
-          <p className="text-white/70 text-sm">GPU Kernel Optimization, Autonomous Robotics Platform, Arbitra Backtesting Engine</p>
+          <p className="text-white/70 text-sm">Fantasy Premier League Optimization, Autonomous Robotics Platform, Pokerbots</p>
         </div>
       </div>
     )
@@ -170,7 +170,6 @@ const ClassesContent = () => {
     
     // // Sophomore Spring '26
     { code: "6.1910", title: "Computation Structures", category: "Hardware", upcoming: true },
-    { code: "6.2080", title: "Semiconductor Electronic Circuits", category: "Hardware", upcoming: true },
     { code: "6.1903", title: "Introduction to Low-level Programming in C and Assembly", category: "Hardware", upcoming: true },
     { code: "16.632B", title: "Introduction to Autonomous Machines II", category: "ML & Robotics", upcoming: true },
     { code: "6.1020", title: "Software Construction", category: "Software", upcoming: true },

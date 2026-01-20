@@ -9,6 +9,8 @@ const Contact = () => {
   const formRef = useRef();
   const sectionRef = useRef(null);
   const terminalRef = useRef(null);
+  const earthContainerRef = useRef(null);
+  const [earthHeight, setEarthHeight] = useState(null);
   const isInView = useInView(sectionRef, { once: false, margin: "-100px" });
   const terminalInView = useInView(terminalRef, { once: false, margin: "-200px" });
   const [form, setForm] = useState({
@@ -93,6 +95,16 @@ const Contact = () => {
       return () => clearTimeout(resetTimer);
     }
   }, [terminalInView]);
+
+  // Lock Earth container height to prevent growth
+  useEffect(() => {
+    if (earthContainerRef.current && !earthHeight) {
+      const height = earthContainerRef.current.offsetHeight;
+      if (height > 0) {
+        setEarthHeight(height);
+      }
+    }
+  }, [earthHeight]);
 
   // Email validation regex
   const validateEmail = (email) => {
@@ -567,7 +579,11 @@ const Contact = () => {
           </div>
 
           {/* Earth Globe Section */}
-          <div className='xl:flex-1 xl:h-auto md:h-[550px] h-[350px] min-h-[350px] relative w-full'>
+          <div 
+            ref={earthContainerRef}
+            className='xl:flex-1 xl:h-auto md:h-[550px] h-[350px] min-h-[350px] relative w-full'
+            style={earthHeight ? { height: `${earthHeight}px`, maxHeight: `${earthHeight}px` } : {}}
+          >
             <div className="w-full h-full">
               <EarthCanvas />
             </div>

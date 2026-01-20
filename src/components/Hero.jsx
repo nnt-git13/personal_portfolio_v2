@@ -79,8 +79,8 @@ const Hero = () => {
 
     const handleDownloadResume = () => {
         const link = document.createElement('a');
-        link.href = '/Nathan_s_Resume.pdf';
-        link.download = 'Nathan_s_Resume.pdf';
+        link.href = '/Nathan_s_Resume-hw.pdf';
+        link.download = 'Nathan_s_Resume-hw.pdf';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -282,7 +282,7 @@ const Hero = () => {
                                 whileHover={{ scale: 1.05, y: -2 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                Download Resume
+                                Download 
                             </motion.button>
                         </motion.div>
                     </div>

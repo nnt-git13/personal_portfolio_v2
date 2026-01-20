@@ -33,12 +33,12 @@ export const timelineData = [
     {
         id: 4,
         date: 'September 2025 - Current',
-        title: 'GPU Kernel Optimization Project',
-        role: 'Student Engineer',
-        description: 'Developed and optimized fused CUDA kernels using Triton JIT compiler. Achieved significant performance improvements through memory hierarchy optimization and block/thread scheduling.',
-        tech: ['CUDA', 'Triton', 'Python', 'MLIR', 'LLVM'],
+        title: 'XGenius: Machine Learning & Data Platform for Fantasy Premier League',
+        role: 'Personal Project',
+        description: 'Designed and deployed a production Python-based backend (FastAPI) for automated data ingestion, validation, and analysis, integrating multiple external APIs with asynchronous I/O and enforcing rate limits, retries, and schema checks. Developed and productionized machine learning models (Ridge Regression, Random Forest, Gradient Boosting, Neural Networks, Transformer architectures) for player performance prediction, implementing comprehensive feature engineering pipelines that extract 50+ features from season performance, form trends, fixture difficulty, and contextual factors. Implemented probabilistic prediction systems with uncertainty quantification, providing confidence intervals, risk scores, and percentile estimates. Optimized backend performance through connection pooling, query profiling, and caching strategies, reducing end-to-end latency and improving system stability under concurrent load.',
+        tech: ['Python', 'FastAPI', 'Machine Learning', 'Neural Networks', 'Transformers', 'Data Engineering', 'Backend Development'],
         category: 'project',
-        github: 'https://github.com/nnt-git13/flashflow' // Research project
+        github: 'https://github.com/nnt-git13/XGenius'
     },
     {
         id: 5,
@@ -53,8 +53,8 @@ export const timelineData = [
     {
         id: 6,
         date: 'October 2025 - Ongoing',
-        title: 'FPGA & RISC-V Hardware Project',
-        role: 'Student Engineer',
+        title: '(Building) FPGA & RISC-V Hardware Project',
+        role: 'Personal Project',
         description: 'Designed and implemented FPGA-based systems and RISC-V processor components. Worked on hardware-software co-design for embedded applications.',
         tech: ['FPGA', 'Verilog', 'RISC-V', 'Hardware Design', 'PCB Design'],
         category: 'project',
